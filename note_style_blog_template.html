@@ -1,0 +1,385 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>NUANCEにハマるまでの軌跡 | noteじゃないよ</title>
+<style>
+  :root {
+    --note-green: #41c9b4;
+    --note-black: #212121;
+    --note-gray: #6e6e6e;
+    --note-light-gray: #efefef;
+    --note-border: #e5e5e5;
+    --max-width: 680px;
+  }
+
+  * { box-sizing: border-box; }
+
+  body {
+    margin: 0;
+    font-family: -apple-system, BlinkMacSystemFont, "Hiragino Sans",
+      "Hiragino Kaku Gothic ProN", "Yu Gothic", "Meiryo", sans-serif;
+    color: var(--note-black);
+    background: #ffffff;
+    line-height: 1.9;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  header.site-header {
+    border-bottom: 1px solid var(--note-border);
+    padding: 14px 24px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    position: sticky;
+    top: 0;
+    background: #fff;
+    z-index: 100;
+  }
+  .site-header .logo {
+    font-weight: 700;
+    font-size: 20px;
+    color: var(--note-black);
+    text-decoration: none;
+    letter-spacing: 0.5px;
+  }
+  .site-header nav a {
+    margin-left: 18px;
+    font-size: 14px;
+    color: var(--note-gray);
+    text-decoration: none;
+  }
+  .btn-post {
+    background: var(--note-black);
+    color: #fff !important;
+    padding: 8px 18px;
+    border-radius: 20px;
+    font-size: 14px;
+  }
+
+  main {
+    max-width: var(--max-width);
+    margin: 0 auto;
+    padding: 40px 20px 80px;
+  }
+
+  .category-tag {
+    display: inline-block;
+    font-size: 13px;
+    color: var(--note-green);
+    font-weight: 600;
+    margin-bottom: 12px;
+  }
+
+  h1.article-title {
+    font-size: 30px;
+    font-weight: 700;
+    line-height: 1.5;
+    margin: 0 0 20px;
+    word-break: break-word;
+  }
+
+  .author-bar {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 24px;
+  }
+  .author-avatar {
+    width: 44px;
+    height: 44px;
+    border-radius: 50%;
+    background: var(--note-light-gray);
+    flex-shrink: 0;
+    overflow: hidden;
+  }
+  .author-avatar img { width: 100%; height: 100%; object-fit: cover; }
+  .author-meta { font-size: 14px; }
+  .author-name { font-weight: 600; color: var(--note-black); }
+  .post-date { color: var(--note-gray); font-size: 13px; }
+
+  .eyecatch {
+    width: 100%;
+    aspect-ratio: 1.91 / 1;
+    background: var(--note-light-gray);
+    border-radius: 4px;
+    margin: 24px 0 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #b5b5b5;
+    font-size: 14px;
+    overflow: hidden;
+  }
+  .eyecatch img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    object-position: center;
+  }
+
+  article.body {
+    font-size: 17px;
+    color: #333;
+  }
+  article.body h2 {
+    font-size: 22px;
+    font-weight: 700;
+    margin: 48px 0 20px;
+    line-height: 1.6;
+    border-left: 4px solid var(--note-green);
+    padding-left: 12px;
+  }
+  article.body h3 {
+    font-size: 20px;
+    font-weight: 700;
+    margin: 36px 0 16px;
+    line-height: 1.6;
+  }
+  article.body p {
+    margin: 0 0 28px;
+    white-space: pre-line;
+  }
+  article.body a {
+    color: var(--note-green);
+    text-decoration: underline;
+  }
+  article.body blockquote.lead-quote {
+    margin: 32px 0;
+    padding: 16px 20px;
+    border-left: 3px solid var(--note-border);
+    background: #fafafa;
+    color: #333;
+    font-style: normal;
+  }
+  article.body ul, article.body ol {
+    margin: 0 0 28px;
+    padding-left: 1.4em;
+  }
+  article.body li { margin-bottom: 8px; }
+  article.body img {
+    max-width: 100%;
+    display: block;
+    margin: 32px auto;
+    border-radius: 4px;
+  }
+  article.body hr {
+    border: none;
+    border-top: 1px solid var(--note-border);
+    margin: 40px 0;
+  }
+
+  .tag-list {
+    display: flex;
+    gap: 10px;
+    flex-wrap: wrap;
+    margin: 40px 0;
+  }
+  .tag-list span {
+    background: var(--note-light-gray);
+    color: var(--note-gray);
+    font-size: 13px;
+    padding: 6px 14px;
+    border-radius: 16px;
+  }
+
+  .reaction-bar {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 24px;
+    padding: 28px 0;
+    border-top: 1px solid var(--note-border);
+    border-bottom: 1px solid var(--note-border);
+    margin: 40px 0;
+  }
+  .like-button {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    background: #fff;
+    border: 1px solid var(--note-border);
+    border-radius: 24px;
+    padding: 10px 22px;
+    font-size: 15px;
+    cursor: pointer;
+    color: var(--note-black);
+  }
+  .share-icons { display: flex; gap: 12px; }
+  .share-icons span {
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    background: var(--note-light-gray);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 13px;
+    color: var(--note-gray);
+  }
+
+  .profile-card {
+    display: flex;
+    gap: 16px;
+    padding: 24px;
+    background: #fafafa;
+    border-radius: 8px;
+    margin-bottom: 40px;
+  }
+  .profile-card .author-avatar { width: 64px; height: 64px; }
+  .profile-card .name { font-weight: 700; font-size: 16px; margin-bottom: 6px; }
+  .profile-card .bio { font-size: 14px; color: var(--note-gray); line-height: 1.7; }
+
+  footer.site-footer {
+    text-align: center;
+    font-size: 13px;
+    color: var(--note-gray);
+    padding: 30px 0;
+    border-top: 1px solid var(--note-border);
+  }
+
+  /* Twitter埋め込み用の調整 */
+  .twitter-embed { margin: 32px 0; }
+
+  @media (max-width: 480px) {
+    h1.article-title { font-size: 24px; }
+    article.body { font-size: 16px; }
+    main { padding: 24px 16px 60px; }
+  }
+</style>
+</head>
+<body>
+
+<header class="site-header">
+  <a href="#" class="logo">noteじゃないよ</a>
+  <nav>
+    <a href="#">ホーム</a>
+    <a href="#" class="btn-post">投稿する</a>
+  </nav>
+</header>
+
+<main>
+
+  <span class="category-tag">推しごと</span>
+
+  <h1 class="article-title">
+    NUANCEにハマるまでの軌跡
+  </h1>
+
+  <div class="author-bar">
+    <div class="author-avatar">
+      <img src="https://pbs.twimg.com/profile_images/1697846630685540352/uGKXUVzy_400x400.jpg" alt="著者アイコン">
+    </div>
+    <div class="author-meta">
+      <div class="author-name">ニャハハ</div>
+      <div class="post-date">2026年7月8日</div>
+    </div>
+  </div>
+
+  <div class="eyecatch">
+    <img src="cover.png" alt="NUANCEにハマるまでの軌跡 カバー画像">
+  </div>
+
+  <article class="body">
+
+    <blockquote class="lead-quote">
+      <strong>結論から言ってちょうだい</strong><br><br>
+      ・お笑い好きで寺田寛明さんのYoutubeからNUANCEの名前を知る<br>
+      ・フェスで椅子と個性的な曲に惹かれ、70分ノンストップでしっかりハマる<br>
+      ・たまたま付けた「きょスペ」をきっかけに、蓮水の間でKYOMIの虜になる
+    </blockquote>
+
+    <p>どうも、ニャハハです。最近のきょスペでフォローしたきっかけなどの話題が出たいたので、割と新規の自分がどうやってハマったかの記録として残しておきます。<br>
+      まず簡潔に前提を話すと、普段はハロプロとお笑いライブをよく見てるものです。NUANCEを知ったきっかけは、寺田寛明さんのいつかのYoutube（アイドルを語るやつ）でNUANCEは曲がいいよねという話を聞いて、なんとなく名前を覚えていました。<br>
+      もともとあまりフェス系行かないですが、2025年デビューのハロプロの新グループを追っかけて、いろんなフェスを行くようになって、思えばそれがNUCANCEに出会うきっかけにもなっていた。以下は参加したイベントの順番で整理してますが、内容はそこまで濃いものではありません。</p>
+
+    <h2>2025年5月10日　MAWA LOOP OSAKA 2025 10th Anniversary（大阪府内各所・サーキットイベント等）</h2>
+
+    <p>目当てのハロのグループが2番手で終わって、アメ村の路頭に迷ってました。暇なので名前は聞いたことあるけど見たことないグループを見てみようと思って初見。<br>
+    いきなり椅子持って出てきて何事？！って思ったら、最初のCarmine泥んでのちょっとジャズっぽいメロディでいきなり引き込まれて、全体的に渋めの聞かせるセトリでかなり個性を感じて好印象、あとタイムマ、変な曲すぎて好き。</p>
+
+    <div class="twitter-embed">
+      <blockquote class="twitter-tweet"><p lang="ja" dir="ltr">【20250510_SETLIST】<br><br>🚩MAWA LOOP OSAKA 2025<br>🌀<a href="https://x.com/hashtag/%E3%83%9E%E3%83%AF%E3%83%AB%E3%83%BC%E3%83%97?src=hash&amp;ref_src=twsrc%5Etfw">#マワループ</a><br>🏯FANJ twice<br><br>SE<br>M1 Carmine泥んで<br>M2 ルカルカ<br>M3 悲しみダンス<br>M4 テキーラサンライズ<br>M5 セツナシンドローム<br>M6 ⾚レンガ空中さんぽ<br>M7 タイムマジックロンリー<br>M8 highlight<br><br>📷 艶やかに〜👗✨（水分量👀？💦）<br><br>NUANCE… <a href="https://t.co/v4aCA3GyGw">pic.twitter.com/v4aCA3GyGw</a></p>&mdash; NUANCE（ヌュアンス） (@nuance_official) <a href="https://x.com/nuance_official/status/1921080317684875322?ref_src=twsrc%5Etfw">May 10, 2025</a></blockquote>
+      <script async src="https://platform.x.com/widgets.js" charset="utf-8"></script>
+    </div>
+
+    <h2>2025年10月12日　UP-T presents かがやきフェス2025 DAY2（石川県内各所・サーキットイベント等）</h2>
+
+    <p>前回から少しづつ曲聞き始めて、同じ目当てで金沢に行ったけど、今回はヌュもあらかじめ予定に入れてました。<br>
+    ミライサーカス→sanzan→元中の三連コンボ、曲を聞いただけでは分からなかった、フロアが楽すぎて、後ろでうずうずして見てました。</p>
+
+    <div class="twitter-embed">
+      <blockquote class="twitter-tweet"><p lang="ja" dir="ltr">【20251012_SETLIST】<br><br>🚩 <a href="https://x.com/hashtag/%E3%81%8B%E3%81%8C%E3%82%84%E3%81%8D%E3%83%95%E3%82%A7%E3%82%B9?src=hash&amp;ref_src=twsrc%5Etfw">#かがやきフェス</a><br>🏯GOLDCREEK<br><br>かがやきフェス DAY2<br><br>SE<br>M1 Mellow Dancer<br>M2 ハーバームーン<br>M3 ミライサーカス<br>M4 sanzan<br>M5 特急 元町・中華街行き27分<a href="https://x.com/hashtag/%E8%B6%85%E3%83%8C%E3%83%A5%E3%82%A2%E3%83%B3%E3%82%B9?src=hash&amp;ref_src=twsrc%5Etfw">#超ヌュアンス</a> <a href="https://x.com/hashtag/NUANCE?src=hash&amp;ref_src=twsrc%5Etfw">#NUANCE</a> <a href="https://x.com/hashtag/%E3%83%8C%E3%83%A5%E3%82%A2%E3%83%B3%E3%82%B9?src=hash&amp;ref_src=twsrc%5Etfw">#ヌュアンス</a> <a href="https://x.com/hashtag/%E3%83%8C%E3%83%A5?src=hash&amp;ref_src=twsrc%5Etfw">#ヌュ</a> <a href="https://t.co/9m2VJMmA9D">pic.twitter.com/9m2VJMmA9D</a></p>&mdash; NUANCE（ヌュアンス） (@nuance_official) <a href="https://x.com/nuance_official/status/1977203821555466587?ref_src=twsrc%5Etfw">October 12, 2025</a></blockquote>
+      <script async src="https://platform.x.com/widgets.js" charset="utf-8"></script>
+    </div>
+
+    <h2>2025年10月14日　RTNY（Road to NEWYOKOHAMA）TOUR《東京》 新宿MARZ</h2>
+
+    <p>金沢で見た勢いで思い切って急遽チケットを買ってワンマンに。<s>昔DIALOGUE+を通ってたので、離れてから</s>ノンストップライブというものを欲してたところもあるかもしれない。<br>
+      初めて行くライブハウスなので、ここも後ろで見てたけど、全く違う雰囲気のいろんな曲が見れたし、そして3人で70分をやり遂げたことにもグッときて、大分ハマりそうになってた。<br>
+      ちなみに最初の椅子の衝撃が強かったのか、まだ誰か特に気になるメンバーはいなかった。（椅子推し）</p>
+
+    <h2>2025年12月15日　NUANCE ONEMAN LIVE「HOPE」横浜1000CLUB（サウザンドクラブ）</h2>
+
+    <p>大事なライブなので、某ハロメンのバーイベを途中抜けて回した。70分ワンマンで経験積んだので、この時は真ん中のほうに行って、結構一緒について盛り上げることができて、初めて電車にもなれて嬉しかったです。何より90分ノンストップ衝撃だった。</p>
+
+    <h2>2025年12月20日　KAWAii is not ENOUGH supported by エクストロメ Vol.5 BASE GRANBELL</h2>
+
+    <p>ワンマンの余韻もあり、ちょうど他の予定がない日で、初めてハロ以外のグループを目当てに対バン参加した</p>
+    <div class="twitter-embed">
+      <blockquote class="twitter-tweet"><p lang="ja" dir="ltr">そういえばハロ以外を目当てにフェス来るの初めてかも、NUANCE楽しい <a href="https://t.co/OWnAOHh15k">pic.twitter.com/OWnAOHh15k</a></p>&mdash; ニャハハ®🐨 (@r_nyahaha) <a href="https://x.com/r_nyahaha/status/2002280893013189031?ref_src=twsrc%5Etfw">December 20, 2025</a></blockquote>
+      <script async src="https://platform.x.com/widgets.js" charset="utf-8"></script>
+    </div>
+
+    <h2>2026年2月11日　NUANCE NONSTOP ONEMAN LIVE『RTNY2』 新宿MARZ</h2>
+
+    <p>2回目のノンストップワンマン、生意気にも何故かいい番号取れて最前にいる。だいたい1月後半からきょスペ聞き始めて、声がかわいいし毎回面白かったので、緑のペンラを振ることにしました。そしていっぱいファンサもらった(=^・^=)</p>
+
+    <h2>2026年3月6日　NUANCE presents. FOURFOR 代官山UNIT</h2>
+
+    <p>ここは完全に余談ですが、結構自分に影響のでかい対バン。AFTERSは寺田さんの影響で聞いてたけど、airatticときのホ。はここで初見で、今は結構曲を聞いている。</p>
+
+    <h2>2026年3月19日　NUANCE「hole」リリースイベント HMV&BOOKS SHIBUYA</h2>
+
+    <p>漫才好き☆</p>
+
+    <h2>2026年3月31日　蓮水の間~九幕~ CAFEシトカ</h2>
+
+    <p>きょスペから蓮水の間の存在を知り、弾き語り絶対いいじゃんと思って行ってみた。事前にソロの曲を聞いて既にだいぶ好きになったけど、行ってみたら想像してた何倍も距離の近いイベントで恥ずかしかったｗｗ<br>
+      でもここでKYOMIの音楽に触れて、完全に虜になりました。
+      椅子→きょうみへ推し変( ｰ`дｰ´)ｷﾘｯ</p>
+
+    <h2>2026年4月8日　NUANCE「hole」リリースイベント タワーレコード新宿店</h2>
+
+    <p>新年度なので、新しいことを始めるいいきっかけと思い、初めてハロ以外の特典会に参加した。ルールとか流れが全く違うので、事前にいろいろ調べて一歩を踏み出して今に至る。<br><br>
+    根幹にはやはり曲がいいのがあり、現場の雰囲気も結構自分にあってると感じて、その中でさらに推しも見つけたので、ほぼ1年はかかったけど今はすっかりヌュのオタクになった。<br>
+    最近は1/2の確率で現場にいるので（コアラのマーチの服をよく着ています）、ぜひ仲良くしていただけると嬉しいです。<br>
+    新規ですが郷に入っては郷に従えタイプなので、一緒にもっとNUANCEを盛り上げたらいいなと思います。よろしくお願いします！
+    </p>
+
+  </article>
+
+  <div class="tag-list">
+    <span>NUANCE</span>
+    <span>推しこと</span>
+    <span>コアラ</span>
+  </div>
+
+  <div class="reaction-bar">
+    <button class="like-button">♡ スキ</button>
+    <div class="share-icons">
+      <span>X</span>
+      <span>FB</span>
+      <span>Link</span>
+    </div>
+  </div>
+
+</main>
+
+<footer class="site-footer">
+  &copy; 2026 Koala
+</footer>
+
+</body>
+</html>

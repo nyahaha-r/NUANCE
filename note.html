@@ -28,7 +28,7 @@
 
   header.site-header {
     border-bottom: 1px solid var(--note-border);
-    padding: 14px 24px;
+    padding: 12px 16px;
     display: flex;
     align-items: center;
     justify-content: space-between;
@@ -36,27 +36,61 @@
     top: 0;
     background: #fff;
     z-index: 100;
-  }
+    gap: 8px;
+    }
   .site-header .logo {
     font-weight: 700;
-    font-size: 20px;
+    font-size: 18px;
     color: var(--note-black);
     text-decoration: none;
-    letter-spacing: 0.5px;
+    letter-spacing: 0.3px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    flex: 1 1 auto;
+    min-width: 0;
+  }
+  .site-header nav {
+    display: flex;
+    align-items: center;
+    flex-shrink: 0;
+    gap: 10px;
   }
   .site-header nav a {
-    margin-left: 18px;
-    font-size: 14px;
+    margin-left: 0;
+    font-size: 13px;
     color: var(--note-gray);
     text-decoration: none;
+    white-space: nowrap;
   }
   .btn-post {
     background: var(--note-black);
     color: #fff !important;
-    padding: 8px 18px;
+    padding: 6px 14px;
     border-radius: 20px;
-    font-size: 14px;
+    font-size: 13px;
+    white-space: nowrap;
   }
+
+@media (max-width: 480px) {
+  header.site-header {
+    padding: 10px 12px;
+  }
+  .site-header .logo {
+    font-size: 15px;
+    max-width: 45%;
+  }
+  .site-header nav a {
+    font-size: 12px;
+  }
+  .btn-post {
+    padding: 6px 10px;
+    font-size: 12px;
+  }
+  h1.article-title { font-size: 22px; }
+  article.body { font-size: 16px; }
+  main { padding: 24px 16px 60px; }
+}
 
   main {
     max-width: var(--max-width);
@@ -292,7 +326,7 @@
 
     <p>初めまして、ニャハハと申します。最近の「きょスペ」でフォローしたきっかけなどの話題が出ていたので、割と新規の自分がどうやってハマったかの記録として残しておきます。<br>
       まず簡潔に前提を話すと、普段はハロプロとお笑いライブをよく見てるものです。NUANCEを知ったきっかけは、寺田寛明さんのいつかのYouTube（アイドルを語るやつ）でNUANCEは曲がいいよねという話を聞いて、なんとなく名前を覚えていました。<br>
-      もともとあまりフェス系に行かなかったですが、2025年デビューのハロプロの新グループを追っかけて、いろんなフェスに行くようになって、それがNUANCEに出会うきっかけにもなりました。参加したライブの順番で整理しましたが、記録なのでお気持ちも少なめ、きょうみがあれば読んでください。</p>
+      もともとあまりフェス系に行かなかったですが、2025年デビューのハロプロの新グループを追っかけて、いろんなフェスに行くようになって、それがNUANCEに出会うきっかけにもなりました。参加したライブの順番で整理しましたが、きょうみがあれば読んでください。</p>
 
     <h2>2025年5月10日　MAWA LOOP OSAKA 2025 10th Anniversary（大阪府内各所・サーキットイベント等）</h2>
 
@@ -337,7 +371,7 @@
 
     <h2>2026年2月11日　NUANCE NONSTOP ONEMAN LIVE『RTNY2』 新宿MARZ</h2>
 
-    <p>2回目のノンストップワンマン、生意気にも何故かいい番号が取れて最前に。1月後半からきょスペを聞き始めて、声がかわいいしきょうみという人にもきょうみを持ったので、ここで初めて緑のペンラを振ることにしました。そしていっぱいファンサもらった(=^・^=)</p>
+    <p>2回目のノンストップワンマン、生意気にも何故かいい番号が取れて最前に。1月後半からきょスペを聞き始めて、声がかわいいしきょうみさん本人にも興味を持ったので、ここで初めて緑のペンラを振ることにしました。そしていっぱいファンサもらった(=^・^=)</p>
 
     <h2>2026年3月6日　NUANCE presents. FOURFOR 代官山UNIT</h2>
 
@@ -359,7 +393,7 @@
     <hr style="border: none; border-top: 2px solid #333; margin: 40px 0;">
     まとめますと、根幹にはやはり曲が好きというのがあり、現場の雰囲気も結構自分に合っていると感じて、さらに推しも見つけたので、ほぼ1年は時間かかったけど今はすっかりヌュのオタクになりました。<br><br>
     最近は1/2くらいの確率で現場にいるので（コアラのマーチの服をよく着ています）、ぜひ仲良くしていただけると嬉しいです。新規ですが郷に入っては郷に従うタイプなので、一緒にもっとNUANCEを盛り上げたらいいなと思います。よろしくお願いします！<br><br>
-    PS:一番好きな曲は「yokohama sweet side story」です、対戦よろしくお願いします！
+    PS:一番好きな曲は「yokohama sweet side story」です！
     </p>
 
   </article>
